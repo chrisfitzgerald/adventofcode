@@ -1,0 +1,31 @@
+import re
+
+# A function to convert words to numbers
+def word_to_num(word, num_dict):
+    return num_dict.get(word.lower(), None)
+
+# Read file and calculate total
+def calculate_total(filename):
+    num_dict = {'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six':6, 'seven': 7, 'eight': 8, 'nine': 9, 'zero': 0}
+    total = 0
+
+    with open(filename, "r") as file:
+        for line in file:
+            # Find all digits and words that can be numbers
+            items = re.findall(r'\b\d+\b|\b(?:one|two|three|four|five|six|seven|eight|nine|zero)\b', line, flags=re.IGNORECASE)
+
+            # Convert words to numbers and sum them up
+            for item in items:
+                if item.isdigit():
+                    total += int(item)
+                else:
+                    number = word_to_num(item, num_dict)
+                    if number is not None:
+                        total += number
+
+    return total
+
+# Example usage (the file path needs to be adjusted to your environment)
+total = calculate_total("adventOfCode1.txt")
+print(total)
+
