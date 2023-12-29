@@ -1,12 +1,15 @@
 import re
 
-readFile = open("adventOfCode1.txt", "r")
-total = 0
+readFile = open("adventOfCode1.txt", "r") # open file to scan
+total = 0 # initialize total which will be the sum of all numbers
+digits = [] # initialize digits which will temporarily hold the digits in each line
 
-for line in readFile:
-    digits = re.findall(r'\d', line)
+
+# loop through each line of the file, if there are digits in the line, add the first and last digit to the total
+for line in readFile: 
+    digits = re.findall(r'\d', line) # use regex to find all digits in the line
     if digits:
-        concatenated_number = int(digits[0]) + int(digits[-1])
-        total += concatenated_number
+        total += int((digits[0]) + (digits[-1]))
 
-print(total)
+print(total) # print the total
+
